@@ -11,7 +11,6 @@ namespace ConsoleATMProject
         static void Main(string[] args)
         {
             Console.WriteLine("\nPress any key to continue...");
-            Console.WriteLine();
             Console.ReadKey();
         }
     }
