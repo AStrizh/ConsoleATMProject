@@ -8,11 +8,11 @@ namespace ConsoleATMProjct
 {
     class ATM
     {
-        public List<Account> Accounts { get; set; }
+        
 
         public Atm()
         {
-            Accounts = new List<Account>();
+            
         }
 
         public void CreateAccount()
@@ -34,12 +34,17 @@ namespace ConsoleATMProjct
             account.AccountNumber = s;
             Console.Write("Your account number is: " + account.AccountNumber);
 
-            //Alex needs to add Pin() and Executive() methods in th Account class
             Console.Write("Enter a 4 digit pin: ");
             account.Pin = Console.ReadLine();
 
-            Console.Write("Would you like this to be an executive account? With an executive account, you can withdraw up to $2,000 per day. Enter y for YES and n for NO: ");
-            account.Executive = Console.ReadLine()
+            Console.Write("Would you like this to be an executive account? With an executive account, " +
+                "you can withdraw up to $2,000 per day. Enter y for YES and n for NO: ");
+
+            while(Console.ReadLine() != 'y' || Console.ReadLine() != 'n')
+            {
+                Console.Write("Invalid character. Enter y or n: ";
+            }
+            account.Executive = Console.ReadLine();
 
             Console.Write("Enter initial balance: ");
             if (float.Parse(Console.ReadLine()) >= 0)
@@ -50,15 +55,21 @@ namespace ConsoleATMProjct
             {
                 account.Balance = 0.0;
             }
-            
+
             //Appending data to the .csv file
-            static string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
-            string fileName = myDirectory + "\\accounts.csv";
+            try
+            {
+                static string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
+                string fileName = myDirectory + "\\accounts.csv";
 
-            string clientDetails = account.FirstName + "," + account.LastName + "," + account.AccountNumber + "," + account.Pin + "," + account.Executive + "," + account.Balance;
-   
-            File.AppendAllText(fileName, clientDetails);
+                string clientDetails = account.FirstName + "," + account.LastName + "," + account.AccountNumber + "," + account.Pin + "," + account.Executive + "," + account.Balance;
 
+                File.AppendAllText(fileName, clientDetails);
+            }
+            catch (IOException e)
+            {
+                UI.AlertUserSomehow(e.ToString());
+            }
         }
 
         /*
