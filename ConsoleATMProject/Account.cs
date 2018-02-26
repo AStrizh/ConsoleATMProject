@@ -13,6 +13,8 @@ namespace ConsoleATMProject
         private string lastName;
         private string accountNumber;
         private double balance;
+        private string pin;
+        private Boolean executive;
 
 
         public string FirstName
@@ -63,6 +65,31 @@ namespace ConsoleATMProject
             set
             {
                 balance = value;
+            }
+
+        }
+
+        public string Pin
+        {
+            get
+            {
+                return pin;
+            }
+            set
+            {
+                pin = value;
+            }
+
+        }
+        public Boolean Executive
+        {
+            get
+            {
+                return executive;
+            }
+            set
+            {
+                executive = value;
             }
 
         }
