@@ -103,7 +103,6 @@ namespace ConsoleATMProject
                    Pin + "," + 
                    executiveString + "," + 
                    Balance;
-
         }
 
     }

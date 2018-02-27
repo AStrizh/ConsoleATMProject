@@ -53,7 +53,6 @@ namespace ConsoleATMProject
             }
             account.Executive = (answer == 'y');
 
-
             Console.WriteLine("Enter initial balance: ");
 
             double balance = Double.Parse( Console.ReadLine() );
@@ -65,24 +64,24 @@ namespace ConsoleATMProject
             }
             account.Balance = balance;
 
+        }
+
+
+        public static void AccountToFile(Account account)
+        {
             try
             {
                 //Appending data to the .csv file
                 string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
                 string fileName = myDirectory + "\\accounts.csv";
+                File.AppendAllText(fileName, account.ToString());
 
-                //TODO: The file cannot be accessed while application is running. Need some work around.
-                //File.AppendAllText(fileName, clientDetails);
-
-                Console.WriteLine(account.ToString());
             }
 
             catch (IOException e)
             {
                 Console.Write(e.ToString());
             }
-
-
         }
 
         /*
