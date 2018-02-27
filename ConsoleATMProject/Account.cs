@@ -94,5 +94,17 @@ namespace ConsoleATMProject
 
         }
 
+        public override string ToString()
+        {
+            string executiveString = (Executive) ? "y" : "n";
+
+            return FirstName + "." + LastName + "," +
+                   AccountNumber + "," + 
+                   Pin + "," + 
+                   executiveString + "," + 
+                   Balance;
+
+        }
+
     }
 }

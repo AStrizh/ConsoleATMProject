@@ -26,7 +26,7 @@ namespace ConsoleATMProject
                 string name = string.Join(" ", value[0].Split('.'));
 
                 Console.WriteLine("\nThe name on the account is: " + name);
-                Console.WriteLine("\nThe balance is: $" + value[2]);
+                Console.WriteLine("\nThe balance is: $" + value[4]);
 
                 if(String.Compare(value[3], "y") == 0)
                 {
@@ -37,7 +37,7 @@ namespace ConsoleATMProject
                     Console.WriteLine("\nYou are a poor shmuck!");
                 }
 
-                Console.WriteLine("\nYour pin number is: " + value[4] + " Dont tell anybody!");
+                Console.WriteLine("\nYour pin number is: " + value[2] + " Dont tell anybody!");
             }
             else
                 Console.WriteLine("\nThat account number doesnt exist");
