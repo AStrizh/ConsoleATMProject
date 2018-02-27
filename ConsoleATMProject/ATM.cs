@@ -1,21 +1,23 @@
-﻿using System;
+﻿using ConsoleATMProject;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleATMProjct
+namespace ConsoleATMProject
 {
     class ATM
     {
         public List<Account> Accounts { get; set; }
 
-        public Atm()
+        public void Atm()
         {
             Accounts = new List<Account>();
         }
 
-        public void CreateAccount()
+        public static void CreateAccount()
         {
             var account = new Account();
 
@@ -32,16 +34,24 @@ namespace ConsoleATMProjct
                 s = String.Concat(s, random.Next(10).ToString());
             }
             account.AccountNumber = s;
-            Console.Write("Your account number is: " + account.AccountNumber);
+            Console.Write("\nYour account number is: " + account.AccountNumber +
+                          "\nPlease create a 4 digit pin number: ");
 
             //Alex needs to add Pin() and Executive() methods in th Account class
             Console.Write("Enter a 4 digit pin: ");
             account.Pin = Console.ReadLine();
 
-            Console.Write("Would you like this to be an executive account? With an executive account, you can withdraw up to $2,000 per day. Enter y for YES and n for NO: ");
-            account.Executive = Console.ReadLine()
+            Console.Write("\nWould you like this to be an executive account? " +
+                          "\nWith an executive account, you can withdraw up to $2,000 per day. " +
+                          "\nMust maintain a balance of $10,000 on an executive account. " +
+                          "\nEnter y for YES or n for NO: ");
+
+            string answer = Console.ReadLine().ToLower();
+            account.Executive = String.Compare(answer, "y") == 0 ||
+                                String.Compare(answer, "yes") == 0;
 
             Console.Write("Enter initial balance: ");
+
             if (float.Parse(Console.ReadLine()) >= 0)
             {
                 account.Balance = Double.Parse(Console.ReadLine());
@@ -52,11 +62,12 @@ namespace ConsoleATMProjct
             }
             
             //Appending data to the .csv file
-            static string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
+            string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
             string fileName = myDirectory + "\\accounts.csv";
 
-            string clientDetails = account.FirstName + "," + account.LastName + "," + account.AccountNumber + "," + account.Pin + "," + account.Executive + "," + account.Balance;
-   
+            string clientDetails = account.FirstName + "." + account.LastName + "," + account.AccountNumber + "," + account.Pin + "," + account.Executive + "," + account.Balance;
+
+            //TODO: The file cannot be accessed while application is running.Need some work around.
             File.AppendAllText(fileName, clientDetails);
 
         }

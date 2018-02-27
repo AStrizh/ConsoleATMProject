@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using ConsoleATMProject;
 
 namespace ConsoleATMProject
 {
@@ -40,6 +41,17 @@ namespace ConsoleATMProject
             }
             else
                 Console.WriteLine("\nThat account number doesnt exist");
+
+
+            Console.WriteLine("\nWould you like to create a new account? "+
+                              "\nEnter y for YES or n for NO: ");
+
+            string answer = Console.ReadLine().ToLower();
+            bool newAccount = String.Compare(answer, "y") == 0 ||
+                              String.Compare(answer, "yes") == 0;
+
+            if (newAccount)
+                ATM.CreateAccount();
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
