@@ -15,7 +15,11 @@ namespace ConsoleATMProject
             //TODO: Figure out how to use working directory rather than hardcoded path
             string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject";
             string fileName = myDirectory + "\\accounts.csv";
-            Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileName);
+
+            string fileResource = Resource.accounts;
+            //Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileResource);
+            //Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileName);
+            Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateNewMap(fileResource);
 
             Console.WriteLine("\nDo you want to check accounts?");
             char answer1 = Char.ToLower(Console.ReadLine()[0]);
