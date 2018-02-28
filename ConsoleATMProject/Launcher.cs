@@ -12,12 +12,17 @@ namespace ConsoleATMProject
     {
         static void Main(string[] args)
         {
-
-            string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            
+            //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
+            string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;  //Path to get out of bin folder
             string fileName = myDirectory + "\\accounts.csv";
 
             Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileName);
 
+            MenuManager myMenuManager = new MenuManager(myDictionary);
+            myMenuManager.MainMenu();
+
+            /*
             Console.WriteLine("\nDo you want to check accounts?");
             char answer1 = Char.ToLower(Console.ReadLine()[0]);
             while (answer1 != 'y' && answer1 != 'n')
@@ -40,10 +45,12 @@ namespace ConsoleATMProject
 
             if (answer2 == 'y')
                 ATM.CreateAccount();
+            */
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
+
 
 
         static void CheckAccount(Dictionary<string, Account> myDictionary)

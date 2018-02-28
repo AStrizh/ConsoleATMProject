@@ -76,7 +76,7 @@ namespace ConsoleATMProject
 
             catch (IOException e)
             {
-                Console.Write(e.ToString());
+                Console.WriteLine(e.ToString());
             }
         }
 

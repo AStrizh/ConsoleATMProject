@@ -47,6 +47,7 @@
     <Compile Include="AccountsMapCreator.cs" />
     <Compile Include="ATM.cs" />
     <Compile Include="Launcher.cs" />
+    <Compile Include="MenuManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
