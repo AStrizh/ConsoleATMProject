@@ -22,6 +22,7 @@ namespace ConsoleATMProject
             MenuManager myMenuManager = new MenuManager(myDictionary);
             myMenuManager.MainMenu();
 
+            //This block will be removed once it is confirmed it is useless
             /*
             Console.WriteLine("\nDo you want to check accounts?");
             char answer1 = Char.ToLower(Console.ReadLine()[0]);
@@ -52,7 +53,7 @@ namespace ConsoleATMProject
         }
 
 
-
+        //This account tester should be removed soon
         static void CheckAccount(Dictionary<string, Account> myDictionary)
         {
             Console.WriteLine("\nEnter the account number you are interested in: ");

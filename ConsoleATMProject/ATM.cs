@@ -13,6 +13,9 @@ namespace ConsoleATMProject
     {
         public List<Account> Accounts { get; set; }
 
+        //ATM daily allotment. How to use it? Singleton probably best.
+        int cashInATM = 10000; 
+
         public void Atm()
         {
             Accounts = new List<Account>();
@@ -72,7 +75,6 @@ namespace ConsoleATMProject
                 string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
                 string fileName = myDirectory + "\\accounts.csv";
                 File.AppendAllText(fileName, account.ToString());
-
             }
 
             catch (IOException e)
@@ -87,21 +89,94 @@ namespace ConsoleATMProject
             string s = string.Empty;
             for (int i = 0; i < 10; i++)
             {
-                s = String.Concat(s, random.Next(10).ToString());
+                s = string.Concat(s, random.Next(10).ToString());
             }
             return s;
         }
-
-
        
         public static void Deposit(Account myAccount)
         {
+            Console.WriteLine("How much would you like to deposit?");
+            int deposit = int.Parse(Console.ReadLine());
 
+            myAccount.Balance = myAccount.Balance + deposit;
         }
 
+        //TODO: Needs to account for maximum available funds
         public static void Withdraw(Account myAccount)
         {
+            string greeting = $"Welcome {myAccount.FirstName}!";
+            string executiveGreeting = "Thank you for being part of our Executive rewards program!";
 
+            Console.WriteLine(greeting);
+            if (myAccount.Executive)
+                Console.WriteLine(executiveGreeting);
+
+            Console.WriteLine("How much would you like to withdraw?");
+
+            int selection = 0;
+            while (selection < 1 || selection > 4)
+            {
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("Please make your selection");
+                Console.WriteLine();
+                Console.WriteLine(" 1) $40");
+                Console.WriteLine(" 2) $60");
+                Console.WriteLine(" 3) $100");
+                Console.WriteLine(" 4) Other Amount");
+                Console.WriteLine(" 5) Exit");
+
+
+                selection = int.Parse(Console.ReadLine());
+
+                switch (selection)
+                {
+                    case 1:
+                        if (myAccount.Balance >=40)
+                            myAccount.Balance = myAccount.Balance-40;
+                        else
+                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                        break;
+                    case 2:
+                        if (myAccount.Balance >= 60)
+                            myAccount.Balance = myAccount.Balance - 60;
+                        else
+                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                        break;
+                    case 3:
+                        if (myAccount.Balance >= 100)
+                            myAccount.Balance = myAccount.Balance - 100;
+                        else
+                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                        break;
+                    case 4:
+                        int withdraw = WithdrawAmount();
+                        if (myAccount.Balance >= withdraw)
+                            myAccount.Balance = myAccount.Balance - withdraw;
+                        else
+                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        Console.WriteLine("Selection not understood please try again");
+                        break;
+                }
+            }
+        }
+
+        private static int WithdrawAmount()
+        {
+            Console.WriteLine("Withdrawal amount must be a multiple of $20.");
+            int amount = int.Parse(Console.ReadLine());
+
+            while (amount!=0 && (amount%20)!=0)
+            {
+                Console.WriteLine("That amount is invalid. Please enter a multiple of $20, or enter 0 to exit.");
+                amount = int.Parse(Console.ReadLine());
+            }
+
+            return amount;
         }
 
         public static void CheckBalance(Account myAccount)
@@ -118,7 +193,6 @@ namespace ConsoleATMProject
             Console.WriteLine();
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
-
         }
 
     }

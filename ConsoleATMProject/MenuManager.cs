@@ -28,7 +28,7 @@ namespace ConsoleATMProject
             while(selection < 1 || selection > 3)
             {
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Console.WriteLine("Please Make a selection");
+                Console.WriteLine("Please make your selection");
                 Console.WriteLine();
                 Console.WriteLine(" 1) Check Account");
                 Console.WriteLine(" 2) Create new Account");
@@ -44,6 +44,8 @@ namespace ConsoleATMProject
                     case 2:
                         CreateAccount();
                         break;
+                    case 3:
+                        break;
                     default:
                         Console.WriteLine("Selection not understood please try again");
                         break;
@@ -54,16 +56,6 @@ namespace ConsoleATMProject
 
         public void AccountMenu()
         {
-            /* 
-             Options are:
-             1) Check Balance
-             2) Withdraw
-             3) Deposit
-             4) Log out
-             */
-
-            //This should probably just pass Account objects to the ATM class
-
             /*
               Question, if account object is modified without a refrence to the dictionary will the object
               in the dictionary change.
@@ -100,6 +92,8 @@ namespace ConsoleATMProject
                         case 3:
                             ATM.Deposit(account);
                             break;
+                        case 4:
+                            break;
                         default:
                             Console.WriteLine("Selection not understood please try again");
                             break;
@@ -131,6 +125,8 @@ namespace ConsoleATMProject
                 {
                     case 1:
                         AccountMenu(); //Call CreateAccount at ATM class
+                        break;
+                    case 2:
                         break;
                     default:
                         Console.WriteLine("Selection not understood please try again");
@@ -189,9 +185,6 @@ namespace ConsoleATMProject
                     }
                 }
             }
-
-
-
             return userAccount;
         }
     }
