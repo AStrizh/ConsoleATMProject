@@ -62,12 +62,13 @@ namespace ConsoleATMProject
 
         }
 
-
+        //This method probably should be in the main method and gets called after everything else is done
         public static void AccountToFile(Account account)
         {
             try
             {
                 //Appending data to the .csv file
+                //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
                 string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
                 string fileName = myDirectory + "\\accounts.csv";
                 File.AppendAllText(fileName, account.ToString());
@@ -92,22 +93,34 @@ namespace ConsoleATMProject
         }
 
 
-        /*
-        public void Deposit()
+       
+        public static void Deposit(Account myAccount)
         {
 
         }
 
-        public void Withdraw()
+        public static void Withdraw(Account myAccount)
         {
 
         }
 
-        public void checkBalance()
+        public static void CheckBalance(Account myAccount)
         {
+            string greeting = $"Welcome {myAccount.FirstName}!";
+            string executiveGreeting = "Thank you for being part of our Executive rewards program!";
+
+            Console.WriteLine(greeting);
+            if (myAccount.Executive)
+                Console.WriteLine(executiveGreeting);
+
+            Console.WriteLine($"\nYour current balance is: {myAccount.Balance:C}");
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key to log out when you are ready!");
+            Console.ReadKey();
 
         }
-        */
+
     }
 }
 
