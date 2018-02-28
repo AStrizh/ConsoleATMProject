@@ -28,22 +28,17 @@ namespace ConsoleATMProject
             Console.WriteLine("Enter last name: ");
             account.LastName = Console.ReadLine();
 
-            var random = new Random();
-            string s = string.Empty;
-            for (int i = 0; i < 10; i++) { 
-                s = String.Concat(s, random.Next(10).ToString());
-            }
-            account.AccountNumber = s;
-            Console.WriteLine("\nYour account number is: " + account.AccountNumber +
-                          "\nPlease create a 4 digit pin number: ");
-
+            account.AccountNumber = GenerateAccountNumber();
+            Console.WriteLine("Your account number is: " + account.AccountNumber);
+            Console.WriteLine("Please create a 4 digit pin number: ");
             account.Pin = Console.ReadLine();
 
+
             Console.WriteLine("\nWould you like this to be an executive account? " +
-                          "\nWith an executive account, you can withdraw up to $2,000 per day. " +
-                          "\nMust maintain a balance of $10,000 on an executive account. " +
-                          "\n" +
-                          "\nEnter y for YES or n for NO: ");
+                              "\nWith an executive account, you can withdraw up to $2,000 per day. " +
+                              "\nMust maintain a balance of $10,000 on an executive account. " +
+                              "\n" +
+                              "\nEnter y for YES or n for NO: ");
 
             char answer = Char.ToLower(Console.ReadLine()[0]);
             while (answer != 'y' && answer != 'n')            
@@ -83,6 +78,18 @@ namespace ConsoleATMProject
                 Console.Write(e.ToString());
             }
         }
+
+        public static string GenerateAccountNumber()
+        {
+            var random = new Random();
+            string s = string.Empty;
+            for (int i = 0; i < 10; i++)
+            {
+                s = String.Concat(s, random.Next(10).ToString());
+            }
+            return s;
+        }
+
 
         /*
         public void Deposit()
