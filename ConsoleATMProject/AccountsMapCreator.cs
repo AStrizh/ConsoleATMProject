@@ -29,29 +29,6 @@ namespace ConsoleATMProject
             return dictionary;
         }
 
-        public static Dictionary<string, Account> CreateNewMap(string fileResource)
-        {
-            string[] accounts = fileResource.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            Dictionary<string, Account> dictionary = new Dictionary<string, Account>();
-
-            string[] accountData;
-            bool firstrow = true;
-            foreach (string line in accounts)
-            {
-                if (!firstrow)
-                {
-                    Console.WriteLine(line);
-                    accountData = line.Split(',');
-                    dictionary.Add(accountData[1], ArrayToAccount(accountData));
-                }
-                else
-                    firstrow = false;
-            }
-
-            return dictionary;
-        }
-
         public static Account ArrayToAccount(String[] accountData)
         {
             Account account = new Account();

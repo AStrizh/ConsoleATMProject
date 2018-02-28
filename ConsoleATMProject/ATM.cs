@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleATMProject;
+using System.Resources;
 
 namespace ConsoleATMProject
 {
@@ -67,7 +68,7 @@ namespace ConsoleATMProject
             try
             {
                 //Appending data to the .csv file
-                string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject"; //the path in Alex's computer
+                string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
                 string fileName = myDirectory + "\\accounts.csv";
                 File.AppendAllText(fileName, account.ToString());
 

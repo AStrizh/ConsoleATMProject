@@ -12,14 +12,11 @@ namespace ConsoleATMProject
     {
         static void Main(string[] args)
         {
-            //TODO: Figure out how to use working directory rather than hardcoded path
-            string myDirectory = "C:\\Users\\abstr\\Documents\\C#\\Group Project\\ConsoleATMProject\\ConsoleATMProject";
+
+            string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string fileName = myDirectory + "\\accounts.csv";
 
-            string fileResource = Resource.accounts;
-            //Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileResource);
-            //Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileName);
-            Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateNewMap(fileResource);
+            Dictionary<string, Account> myDictionary = AccountsMapCreator.CreateMap(fileName);
 
             Console.WriteLine("\nDo you want to check accounts?");
             char answer1 = Char.ToLower(Console.ReadLine()[0]);
@@ -30,7 +27,6 @@ namespace ConsoleATMProject
             }
             if(answer1 == 'y')
                 CheckAccount(myDictionary);
-
 
             Console.WriteLine("\nWould you like to create a new account? "+
                               "\nEnter y for YES or n for NO: ");
