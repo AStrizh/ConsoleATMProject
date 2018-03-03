@@ -63,6 +63,7 @@ namespace ConsoleATMProject
             }
             account.Balance = balance;
 
+            //Say youre done
         }
 
         //This method probably should be in the main method and gets called after everything else is done
@@ -194,11 +195,5 @@ namespace ConsoleATMProject
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
         }
-
     }
 }
-
-
-
-
-

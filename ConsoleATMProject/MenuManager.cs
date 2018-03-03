@@ -124,7 +124,7 @@ namespace ConsoleATMProject
                 switch (selection)
                 {
                     case 1:
-                        AccountMenu(); //Call CreateAccount at ATM class
+                        ATM.CreateAccount(); //Call CreateAccount at ATM class
                         break;
                     case 2:
                         break;
@@ -185,6 +185,7 @@ namespace ConsoleATMProject
                     }
                 }
             }
+            Console.Clear();
             return userAccount;
         }
     }

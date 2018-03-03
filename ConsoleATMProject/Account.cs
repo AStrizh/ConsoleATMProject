@@ -14,7 +14,7 @@ namespace ConsoleATMProject
         private string accountNumber;
         private double balance;
         private string pin;
-        private Boolean executive;
+        private bool executive;
 
 
         public string FirstName
@@ -104,6 +104,5 @@ namespace ConsoleATMProject
                    executiveString + "," + 
                    Balance;
         }
-
     }
 }
