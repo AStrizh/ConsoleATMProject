@@ -11,8 +11,12 @@ namespace ConsoleATMProject
 {
     class ATM
     {
-        //ATM daily allotment. How to use it? Singleton probably best.
-        int cashInATM; 
+       int cashInATM;
+       int status;
+       const int LOW = 1;
+       const int MEDIUM = 2;
+       const int NORMAL = 3;
+       const int EMPTY = 0;
 
         private static ATM instance;
 
@@ -20,6 +24,25 @@ namespace ConsoleATMProject
         {
             cashInATM = 10000;
         }
+        public int Status
+        {
+            get { return status; }
+        }
+
+        public void SetStatus()
+        {
+            int currentCash = Instance.Cash;
+
+            if (currentCash == 0)
+                status = EMPTY;
+            else if (currentCash < 500)
+                status = LOW;
+            else if (currentCash < 2000)
+                status = MEDIUM;
+            else
+                status = NORMAL;
+        } 
+
         public int Cash
         {
             get { return cashInATM; }
@@ -37,6 +60,7 @@ namespace ConsoleATMProject
                 return instance;
             }
         }
+
 
 
         public static void CreateAccount()
@@ -172,6 +196,7 @@ namespace ConsoleATMProject
                         {
                             myAccount.Balance = myAccount.Balance - withdraw;
                             Instance.Cash = Instance.Cash - withdraw;
+                            Instance.Status;
                             Console.Clear();
                             Console.WriteLine($"{withdraw}:C was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
