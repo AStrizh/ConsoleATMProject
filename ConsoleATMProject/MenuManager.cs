@@ -68,6 +68,13 @@ namespace ConsoleATMProject
 
             if (account != null)
             {
+                string greeting = $"Welcome {account.FirstName}!";
+                string executiveGreeting = "Thank you for being part of our Executive rewards program!";
+
+                Console.WriteLine(greeting);
+                if (account.Executive)
+                    Console.WriteLine(executiveGreeting);
+
                 int selection = 0;
                 while (selection < 1 || selection > 4)
                 {
@@ -120,13 +127,14 @@ namespace ConsoleATMProject
                 Console.WriteLine(" 2) Main Menu");
 
                 selection = int.Parse(Console.ReadLine());
-
                 switch (selection)
                 {
                     case 1:
                         ATM.CreateAccount(); //Call CreateAccount at ATM class
                         break;
                     case 2:
+                        Console.Clear();
+                        MainMenu();
                         break;
                     default:
                         Console.WriteLine("Selection not understood please try again");

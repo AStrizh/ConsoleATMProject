@@ -11,15 +11,33 @@ namespace ConsoleATMProject
 {
     class ATM
     {
-        public List<Account> Accounts { get; set; }
-
         //ATM daily allotment. How to use it? Singleton probably best.
-        int cashInATM = 10000; 
+        int cashInATM; 
 
-        public void Atm()
+        private static ATM instance;
+
+        private ATM()
         {
-            Accounts = new List<Account>();
+            cashInATM = 10000;
         }
+        public int Cash
+        {
+            get { return cashInATM; }
+            set { cashInATM = value; }
+        }
+
+        public static ATM Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ATM();
+                }
+                return instance;
+            }
+        }
+
 
         public static void CreateAccount()
         {
@@ -127,9 +145,7 @@ namespace ConsoleATMProject
                 Console.WriteLine(" 4) Other Amount");
                 Console.WriteLine(" 5) Exit");
 
-
                 selection = int.Parse(Console.ReadLine());
-
                 switch (selection)
                 {
                     case 1:
@@ -153,7 +169,13 @@ namespace ConsoleATMProject
                     case 4:
                         int withdraw = WithdrawAmount();
                         if (myAccount.Balance >= withdraw)
+                        {
                             myAccount.Balance = myAccount.Balance - withdraw;
+                            Instance.Cash = Instance.Cash - withdraw;
+                            Console.Clear();
+                            Console.WriteLine($"{withdraw}:C was deducted from your account.");
+                            Console.WriteLine("Please take your cash and have a Wonderful day!");
+                        }                            
                         else
                             Console.WriteLine("We're sorry. You dont now have enough funds on your account");
                         break;
@@ -176,21 +198,12 @@ namespace ConsoleATMProject
                 Console.WriteLine("That amount is invalid. Please enter a multiple of $20, or enter 0 to exit.");
                 amount = int.Parse(Console.ReadLine());
             }
-
             return amount;
         }
 
         public static void CheckBalance(Account myAccount)
         {
-            string greeting = $"Welcome {myAccount.FirstName}!";
-            string executiveGreeting = "Thank you for being part of our Executive rewards program!";
-
-            Console.WriteLine(greeting);
-            if (myAccount.Executive)
-                Console.WriteLine(executiveGreeting);
-
             Console.WriteLine($"\nYour current balance is: {myAccount.Balance:C}");
-
             Console.WriteLine();
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
