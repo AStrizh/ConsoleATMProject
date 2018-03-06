@@ -14,8 +14,7 @@ namespace ConsoleATMProject
        int cashInATM;
        int status;
        const int LOW = 1;
-       const int MEDIUM = 2;
-       const int NORMAL = 3;
+       const int NORMAL = 2;
        const int EMPTY = 0;
 
         private static ATM instance;
@@ -24,23 +23,17 @@ namespace ConsoleATMProject
         {
             cashInATM = 10000;
         }
-        public int Status
-        {
-            get { return status; }
-        }
 
-        public void SetStatus()
+        public int GetStatus()
         {
             int currentCash = Instance.Cash;
 
             if (currentCash == 0)
-                status = EMPTY;
-            else if (currentCash < 500)
-                status = LOW;
-            else if (currentCash < 2000)
-                status = MEDIUM;
+                return EMPTY;
+            else if (currentCash < 1000)
+                return LOW;
             else
-                status = NORMAL;
+                return NORMAL;
         } 
 
         public int Cash
@@ -157,6 +150,7 @@ namespace ConsoleATMProject
 
             Console.WriteLine("How much would you like to withdraw?");
 
+            //TODO: Put status messege here if ATM funds are low
             int selection = 0;
             while (selection < 1 || selection > 4)
             {
@@ -169,9 +163,10 @@ namespace ConsoleATMProject
                 Console.WriteLine(" 4) Other Amount");
                 Console.WriteLine(" 5) Exit");
 
+                //TODO: Also check if there are adequate funds in the ATM
                 selection = int.Parse(Console.ReadLine());
                 switch (selection)
-                {
+                {   //Maybe have multiple possible error messeges and checks if there are any problems
                     case 1:
                         if (myAccount.Balance >=40)
                             myAccount.Balance = myAccount.Balance-40;
@@ -196,7 +191,6 @@ namespace ConsoleATMProject
                         {
                             myAccount.Balance = myAccount.Balance - withdraw;
                             Instance.Cash = Instance.Cash - withdraw;
-                            Instance.Status;
                             Console.Clear();
                             Console.WriteLine($"{withdraw}:C was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
@@ -232,6 +226,31 @@ namespace ConsoleATMProject
             Console.WriteLine();
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
+        }
+
+        public static int GetMaximumWithdrawl(Account myAccount)
+        {
+            int maximum; 
+
+            switch (Instance.GetStatus())
+            {
+                case 0:
+                    maximum = 0;
+                    break;
+                case 1:
+                    maximum = 20;
+                    break;
+                case 2:
+                    if (myAccount.Executive)
+                        maximum = 1000;
+                    else
+                        maximum = 200;
+                    break;
+                default:
+                    maximum = 0;
+                    break;    
+            }
+            return maximum;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ConsoleATMProject
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 Console.WriteLine("Please make your selection");
                 Console.WriteLine();
-                Console.WriteLine(" 1) Check Account");
+                Console.WriteLine(" 1) Access Account");
                 Console.WriteLine(" 2) Create new Account");
                 Console.WriteLine(" 3) System Shutdown");
 
@@ -83,6 +83,7 @@ namespace ConsoleATMProject
                     Console.WriteLine();
                     Console.WriteLine(" 1) Check Balance");
                     Console.WriteLine(" 2) Withdraw");
+                    Console.Write($"  [The current maximum you can withdraw is {ATM.GetMaximumWithdrawl(account)}:C ]");
                     Console.WriteLine(" 3) Deposit");
                     Console.WriteLine(" 4) Log Out");
 
@@ -130,7 +131,7 @@ namespace ConsoleATMProject
                 switch (selection)
                 {
                     case 1:
-                        ATM.CreateAccount(); //Call CreateAccount at ATM class
+                        ATM.CreateAccount();
                         break;
                     case 2:
                         Console.Clear();

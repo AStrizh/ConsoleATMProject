@@ -43,5 +43,32 @@ namespace ConsoleATMProject
 
             return account;
         }
+/*
+        public void PrintDictionary()
+        {
+            //TODO: Rewrite this to print out dictionary
+            using (StreamReader sr = new StreamReader("CDriveDirs.txt"))
+            {
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+
+            try
+            {
+                //Appending data to the .csv file
+                //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
+                string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+                string fileName = myDirectory + "\\accounts.csv";
+                File.AppendAllText(fileName, account.ToString());
+            }
+
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+*/
     }
 }
