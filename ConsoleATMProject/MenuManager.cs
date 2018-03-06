@@ -131,7 +131,13 @@ namespace ConsoleATMProject
                 switch (selection)
                 {
                     case 1:
-                        ATM.CreateAccount();
+                        Account newAccount = ATM.CreateAccount();
+                        accountDictionary.Add(newAccount.AccountNumber, newAccount);
+                        Console.WriteLine("Your account was successfully created!");
+                        Console.WriteLine("Press any key to return to main menu...");
+                        Console.ReadKey();
+                        Console.Clear();
+                        MainMenu();
                         break;
                     case 2:
                         Console.Clear();

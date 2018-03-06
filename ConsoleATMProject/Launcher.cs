@@ -53,7 +53,6 @@ namespace ConsoleATMProject
             PrintDictionary(myDictionary);
         }
 
-
         public static void PrintDictionary(Dictionary<string, Account> myDictionary)
         {
             //Appending data to the .csv file
@@ -68,37 +67,6 @@ namespace ConsoleATMProject
                     writetext.WriteLine(entry.Value);
                 }
             }
-        }
-
-        //This account tester should be removed soon
-        static void CheckAccount(Dictionary<string, Account> myDictionary)
-        {
-            Console.WriteLine("\nEnter the account number you are interested in: ");
-            string accountNumber = Console.ReadLine();
-
-            // See whether Dictionary contains this string.
-            if (myDictionary.ContainsKey(accountNumber))
-            {
-                Account thisAccount = myDictionary[accountNumber];
-
-                string name = thisAccount.FirstName + " " + thisAccount.LastName;
-
-                Console.WriteLine("\nThe name on the account is: " + name);
-                Console.WriteLine($"\nThe balance is: {thisAccount.Balance:C}" );
-
-                if (thisAccount.Executive)
-                {
-                    Console.WriteLine("\nThis is an Executive account!");
-                }
-                else
-                {
-                    Console.WriteLine("\nYou are a poor shmuck!");
-                }
-
-                Console.WriteLine("\nYour pin number is: " + thisAccount.Pin + " Dont tell anybody!");
-            }
-            else
-                Console.WriteLine("\nThat account number doesnt exist");
         }
     }
 }

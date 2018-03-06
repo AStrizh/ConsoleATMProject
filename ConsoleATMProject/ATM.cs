@@ -55,7 +55,7 @@ namespace ConsoleATMProject
 
 
 
-        public static void CreateAccount()
+        public static Account CreateAccount()
         {
             Account account = new Account();
 
@@ -97,7 +97,7 @@ namespace ConsoleATMProject
             }
             account.Balance = balance;
 
-            //Say youre done
+            return account;
         }
 
         //This method probably should be in the main method and gets called after everything else is done
@@ -168,7 +168,6 @@ namespace ConsoleATMProject
                             Instance.Cash = Instance.Cash - 20;
                             Console.WriteLine($"{20:C} was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
-                            Console.WriteLine();
                             Console.WriteLine("\nPress any key to return to main menu...");
                             Console.ReadKey();
                             Console.Clear();
@@ -183,7 +182,6 @@ namespace ConsoleATMProject
                             Instance.Cash = Instance.Cash - 60;
                             Console.WriteLine($"{60:C} was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
-                            Console.WriteLine();
                             Console.WriteLine("\nPress any key to return to main menu...");
                             Console.ReadKey();
                             Console.Clear();
@@ -198,7 +196,6 @@ namespace ConsoleATMProject
                             Instance.Cash = Instance.Cash - 100;
                             Console.WriteLine($"{100:C} was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
-                            Console.WriteLine();
                             Console.WriteLine("\nPress any key to return to main menu...");
                             Console.ReadKey();
                             Console.Clear();
@@ -214,7 +211,6 @@ namespace ConsoleATMProject
                             Instance.Cash = Instance.Cash - withdraw;
                             Console.WriteLine($"{withdraw:C} was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
-                            Console.WriteLine();
                             Console.WriteLine("\nPress any key to return to main menu...");
                             Console.ReadKey();
                             Console.Clear();
