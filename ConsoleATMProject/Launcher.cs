@@ -50,8 +50,25 @@ namespace ConsoleATMProject
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
+            PrintDictionary(myDictionary);
         }
 
+
+        public static void PrintDictionary(Dictionary<string, Account> myDictionary)
+        {
+            //Appending data to the .csv file
+            //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
+            string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            string fileName = myDirectory + "\\newaccounts.csv";
+
+            using (StreamWriter writetext = new StreamWriter(fileName))
+            {
+                foreach (var entry in myDictionary)
+                {
+                    writetext.WriteLine(entry.Value);
+                }
+            }
+        }
 
         //This account tester should be removed soon
         static void CheckAccount(Dictionary<string, Account> myDictionary)
