@@ -17,13 +17,6 @@ namespace ConsoleATMProject
 
         public void MainMenu()
         {
-            /* 
-             Options are:
-             1) Log In/Check Account
-             2) Create new Account
-             3) System Shut Down 
-             */
-
             int selection = 0;
             while(selection < 1 || selection > 3)
             {
@@ -51,19 +44,10 @@ namespace ConsoleATMProject
                         break;
                 }
             }
-
         }
 
         public void AccountMenu()
         {
-            /*
-              Question, if account object is modified without a refrence to the dictionary will the object
-              in the dictionary change.
-              More specifically, if we pass an Account object to the ATM class will we be passing a
-              pointer to the Account or a copy of the Account.
-              If it is a copy, then some of this will need to be reworked so that changes in the account
-              are reflected throughout the system.                
-            */
             Account account = AccountVerification();
 
             if (account != null)
@@ -83,7 +67,7 @@ namespace ConsoleATMProject
                     Console.WriteLine();
                     Console.WriteLine(" 1) Check Balance");
                     Console.Write(" 2) Withdraw");
-                    Console.WriteLine($"  [Current withdrawl max is set to {ATM.GetMaximumWithdrawl(account):C} ]");
+                    Console.WriteLine($" [Current withdrawl max is set to {ATM.GetMaximumWithdrawl(account):C}]");
                     Console.WriteLine(" 3) Deposit");
                     Console.WriteLine(" 4) Log Out");
 
@@ -113,11 +97,6 @@ namespace ConsoleATMProject
 
         public void CreateAccount()
         {
-            /* 
-            Do we need a Create Account menu?
-            Maybe it should just run through the Account Creation steps
-             */
-
             int selection = 0;
             while(selection < 1 || selection > 2)
             {

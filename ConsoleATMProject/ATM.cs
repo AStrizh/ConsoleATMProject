@@ -71,9 +71,8 @@ namespace ConsoleATMProject
             Console.WriteLine("Please create a 4 digit pin number: ");
             account.Pin = Console.ReadLine();
 
-
             Console.WriteLine("\nWould you like this to be an executive account? " +
-                              "\nWith an executive account, you can withdraw up to $2,000 per day. " +
+                              "\nWith an executive account, you can withdraw up to $1,000 per day. " +
                               "\nMust maintain a balance of $10,000 on an executive account. " +
                               "\n" +
                               "\nEnter y for YES or n for NO: ");
@@ -93,29 +92,11 @@ namespace ConsoleATMProject
             {
                 Console.WriteLine("Invalid amount. Try again:"+
                                   "\nMinimum amount is $100");
-                balance = Double.Parse(Console.ReadLine());
+                balance = int.Parse(Console.ReadLine());
             }
             account.Balance = balance;
 
             return account;
-        }
-
-        //This method probably should be in the main method and gets called after everything else is done
-        public static void AccountToFile(Account account)
-        {
-            try
-            {
-                //Appending data to the .csv file
-                //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
-                string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-                string fileName = myDirectory + "\\accounts.csv";
-                File.AppendAllText(fileName, account.ToString());
-            }
-
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
         }
 
         public static string GenerateAccountNumber()
@@ -137,7 +118,6 @@ namespace ConsoleATMProject
             myAccount.Balance = myAccount.Balance + deposit;
         }
 
-        //TODO: Needs to account for maximum available funds
         public static void Withdraw(Account myAccount)
         {
             Console.WriteLine("How much would you like to withdraw?");
@@ -157,10 +137,9 @@ namespace ConsoleATMProject
                 Console.WriteLine(" 4) Other Amount");
                 Console.WriteLine(" 5) Exit");
 
-                //TODO: Also check if there are adequate funds in the ATM
                 selection = int.Parse(Console.ReadLine());
                 switch (selection)
-                {   //Maybe have multiple possible error messeges and checks if there are any problems
+                {   
                     case 1:
                         if (myAccount.Balance >= 20 && currentMaximum >= 20)
                         {
@@ -173,7 +152,7 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
                         break;
                     case 2:
                         if (myAccount.Balance >= 60 && currentMaximum >= 60)
@@ -187,7 +166,7 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
                         break;
                     case 3:
                         if (myAccount.Balance >= 100 && currentMaximum >= 100)
@@ -201,7 +180,7 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
                         break;
                     case 4:
                         int withdraw = WithdrawAmount();
@@ -216,9 +195,12 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }                            
                         else
-                            Console.WriteLine("We're sorry. You dont now have enough funds on your account");
+                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
                         break;
                     case 5:
+                        Console.WriteLine("\nPress any key to return to main menu...");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     default:
                         Console.WriteLine("Selection not understood please try again");
@@ -242,7 +224,7 @@ namespace ConsoleATMProject
 
         public static void CheckBalance(Account myAccount)
         {
-            Console.WriteLine($"\nYour current balance is: {myAccount.Balance:C}");
+            Console.WriteLine($"Your current balance is: {myAccount.Balance:C}");
             Console.WriteLine();
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
