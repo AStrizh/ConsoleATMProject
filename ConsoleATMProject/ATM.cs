@@ -12,7 +12,6 @@ namespace ConsoleATMProject
     class ATM
     {
        int cashInATM;
-       int status;
        const int LOW = 1;
        const int NORMAL = 2;
        const int EMPTY = 0;
@@ -141,23 +140,18 @@ namespace ConsoleATMProject
         //TODO: Needs to account for maximum available funds
         public static void Withdraw(Account myAccount)
         {
-            string greeting = $"Welcome {myAccount.FirstName}!";
-            string executiveGreeting = "Thank you for being part of our Executive rewards program!";
-
-            Console.WriteLine(greeting);
-            if (myAccount.Executive)
-                Console.WriteLine(executiveGreeting);
-
             Console.WriteLine("How much would you like to withdraw?");
 
-            //TODO: Put status messege here if ATM funds are low
+            int currentMaximum = GetMaximumWithdrawl(myAccount);
+            Console.WriteLine($"Current withdrawl max is set to {currentMaximum:C}");
+
             int selection = 0;
             while (selection < 1 || selection > 4)
             {
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 Console.WriteLine("Please make your selection");
                 Console.WriteLine();
-                Console.WriteLine(" 1) $40");
+                Console.WriteLine(" 1) $20");
                 Console.WriteLine(" 2) $60");
                 Console.WriteLine(" 3) $100");
                 Console.WriteLine(" 4) Other Amount");
@@ -168,32 +162,62 @@ namespace ConsoleATMProject
                 switch (selection)
                 {   //Maybe have multiple possible error messeges and checks if there are any problems
                     case 1:
-                        if (myAccount.Balance >=40)
-                            myAccount.Balance = myAccount.Balance-40;
+                        if (myAccount.Balance >= 20 && currentMaximum >= 20)
+                        {
+                            myAccount.Balance = myAccount.Balance-20;
+                            Instance.Cash = Instance.Cash - 20;
+                            Console.WriteLine($"{20:C} was deducted from your account.");
+                            Console.WriteLine("Please take your cash and have a Wonderful day!");
+                            Console.WriteLine();
+                            Console.WriteLine("\nPress any key to return to main menu...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                         else
                             Console.WriteLine("We're sorry. You dont now have enough funds on your account");
                         break;
                     case 2:
-                        if (myAccount.Balance >= 60)
+                        if (myAccount.Balance >= 60 && currentMaximum >= 60)
+                        {
                             myAccount.Balance = myAccount.Balance - 60;
+                            Instance.Cash = Instance.Cash - 60;
+                            Console.WriteLine($"{60:C} was deducted from your account.");
+                            Console.WriteLine("Please take your cash and have a Wonderful day!");
+                            Console.WriteLine();
+                            Console.WriteLine("\nPress any key to return to main menu...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                         else
                             Console.WriteLine("We're sorry. You dont now have enough funds on your account");
                         break;
                     case 3:
-                        if (myAccount.Balance >= 100)
+                        if (myAccount.Balance >= 100 && currentMaximum >= 100)
+                        {
                             myAccount.Balance = myAccount.Balance - 100;
+                            Instance.Cash = Instance.Cash - 100;
+                            Console.WriteLine($"{100:C} was deducted from your account.");
+                            Console.WriteLine("Please take your cash and have a Wonderful day!");
+                            Console.WriteLine();
+                            Console.WriteLine("\nPress any key to return to main menu...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                         else
                             Console.WriteLine("We're sorry. You dont now have enough funds on your account");
                         break;
                     case 4:
                         int withdraw = WithdrawAmount();
-                        if (myAccount.Balance >= withdraw)
+                        if (myAccount.Balance >= withdraw && currentMaximum >= withdraw)
                         {
                             myAccount.Balance = myAccount.Balance - withdraw;
                             Instance.Cash = Instance.Cash - withdraw;
-                            Console.Clear();
-                            Console.WriteLine($"{withdraw}:C was deducted from your account.");
+                            Console.WriteLine($"{withdraw:C} was deducted from your account.");
                             Console.WriteLine("Please take your cash and have a Wonderful day!");
+                            Console.WriteLine();
+                            Console.WriteLine("\nPress any key to return to main menu...");
+                            Console.ReadKey();
+                            Console.Clear();
                         }                            
                         else
                             Console.WriteLine("We're sorry. You dont now have enough funds on your account");

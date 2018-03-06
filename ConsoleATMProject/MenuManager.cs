@@ -82,8 +82,8 @@ namespace ConsoleATMProject
                     Console.WriteLine("What would you like to do today?");
                     Console.WriteLine();
                     Console.WriteLine(" 1) Check Balance");
-                    Console.WriteLine(" 2) Withdraw");
-                    Console.Write($"  [The current maximum you can withdraw is {ATM.GetMaximumWithdrawl(account)}:C ]");
+                    Console.Write(" 2) Withdraw");
+                    Console.WriteLine($"  [Current withdrawl max is set to {ATM.GetMaximumWithdrawl(account):C} ]");
                     Console.WriteLine(" 3) Deposit");
                     Console.WriteLine(" 4) Log Out");
 
