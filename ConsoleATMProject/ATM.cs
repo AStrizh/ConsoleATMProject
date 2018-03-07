@@ -116,6 +116,12 @@ namespace ConsoleATMProject
             int deposit = int.Parse(Console.ReadLine());
 
             myAccount.Balance = myAccount.Balance + deposit;
+
+            Console.WriteLine($"\nThe deposited amount: {deposit:C} will be added to your account.");
+            Console.WriteLine("Press any key to return to main menu...");
+            Console.ReadKey();
+            Console.Clear();
+
         }
 
         public static void Withdraw(Account myAccount)
@@ -126,7 +132,7 @@ namespace ConsoleATMProject
             Console.WriteLine($"Current withdrawl max is set to {currentMaximum:C}");
 
             int selection = 0;
-            while (selection < 1 || selection > 4)
+            while (selection < 1 || selection > 5)
             {
                 Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 Console.WriteLine("Please make your selection");
@@ -152,7 +158,10 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
+                        {
+                            Console.WriteLine("\nWe're sorry, you can't withdraw that amount.");
+                            Withdraw(myAccount);
+                        }
                         break;
                     case 2:
                         if (myAccount.Balance >= 60 && currentMaximum >= 60)
@@ -166,7 +175,10 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
+                        {
+                            Console.WriteLine("\nWe're sorry, you can't withdraw that amount.");
+                            Withdraw(myAccount);
+                        }
                         break;
                     case 3:
                         if (myAccount.Balance >= 100 && currentMaximum >= 100)
@@ -180,7 +192,10 @@ namespace ConsoleATMProject
                             Console.Clear();
                         }
                         else
-                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
+                        {
+                            Console.WriteLine("\nWe're sorry, you can't withdraw that amount.");
+                            Withdraw(myAccount);
+                        }
                         break;
                     case 4:
                         int withdraw = WithdrawAmount();
@@ -193,9 +208,12 @@ namespace ConsoleATMProject
                             Console.WriteLine("\nPress any key to return to main menu...");
                             Console.ReadKey();
                             Console.Clear();
-                        }                            
+                        }
                         else
-                            Console.WriteLine("We're sorry, you can't withdraw that amount.");
+                        {
+                            Console.WriteLine("\nWe're sorry, you can't withdraw that amount.");
+                            Withdraw(myAccount);
+                        }
                         break;
                     case 5:
                         Console.WriteLine("\nPress any key to return to main menu...");
@@ -204,6 +222,7 @@ namespace ConsoleATMProject
                         break;
                     default:
                         Console.WriteLine("Selection not understood please try again");
+                        Withdraw(myAccount);
                         break;
                 }
             }
@@ -228,6 +247,7 @@ namespace ConsoleATMProject
             Console.WriteLine();
             Console.WriteLine("Press any key to log out when you are ready!");
             Console.ReadKey();
+            Console.Clear();
         }
 
         public static int GetMaximumWithdrawl(Account myAccount)

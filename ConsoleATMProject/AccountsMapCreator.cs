@@ -14,7 +14,7 @@ namespace ConsoleATMProject
             StreamReader file = new StreamReader(filename);
 
             Dictionary<string, Account> dictionary = new Dictionary<string, Account>();
-            string line = file.ReadLine();
+            string line;
             string[] accountData;
 
             while ((line = file.ReadLine()) != null)

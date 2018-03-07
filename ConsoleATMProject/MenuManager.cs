@@ -85,6 +85,7 @@ namespace ConsoleATMProject
                             ATM.Deposit(account);
                             break;
                         case 4:
+                            Console.Clear();
                             break;
                         default:
                             Console.WriteLine("Selection not understood please try again");
@@ -136,12 +137,12 @@ namespace ConsoleATMProject
 
             Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Console.WriteLine("Enter your account number");
-            string accountNumber = Console.ReadLine();
 
             bool foundAccount = false;
             int attemptFind = 0;
             while (!foundAccount && attemptFind < 3)
             {
+                string accountNumber = Console.ReadLine();
                 if ( accountDictionary.ContainsKey(accountNumber) )
                 {
                     tempAccountRefrence = accountDictionary[accountNumber];
@@ -152,19 +153,18 @@ namespace ConsoleATMProject
                     attemptFind++;
                     Console.WriteLine("That account does not exist. Please try again.");
                     Console.WriteLine($"You have {3-attemptFind} more attempt(s)");
-                    accountNumber = Console.ReadLine();
                 }
             }
 
             if (foundAccount)
             {
                 Console.WriteLine("Enter your pin number for verification");
-                string pin = Console.ReadLine();
 
                 bool success = false;
                 int attemptVerify = 0;
                 while (!success && attemptVerify < 3)
                 {
+                    string pin = Console.ReadLine();
                     if (string.Compare(tempAccountRefrence.Pin,pin) == 0)
                     {
                         userAccount = tempAccountRefrence;
@@ -174,8 +174,7 @@ namespace ConsoleATMProject
                     {
                         attemptVerify++;
                         Console.WriteLine("The Pin is incorrect. Please try again.");
-                        Console.WriteLine($"You have {3 - attemptVerify} more attempt(s)");
-                        pin = Console.ReadLine();
+                        Console.WriteLine($"You have {3-attemptVerify} more attempt(s)");
                     }
                 }
             }

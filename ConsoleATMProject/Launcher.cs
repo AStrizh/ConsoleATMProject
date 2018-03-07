@@ -13,7 +13,7 @@ namespace ConsoleATMProject
         static void Main(string[] args)
         {
             
-            //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
+            //string myDirectory = Directory.GetCurrentDirectory();        //Path for Release build
             string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;  //Path to get out of bin folder
             string fileName = myDirectory + "\\accounts.csv";
 
@@ -30,10 +30,9 @@ namespace ConsoleATMProject
 
         public static void PrintDictionary(Dictionary<string, Account> myDictionary)
         {
-            //Appending data to the .csv file
-            //string myDirectory = Directory.GetCurrentDirectory();        //Path for final project build
+            //string myDirectory = Directory.GetCurrentDirectory();        //Path for Release project build
             string myDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            string fileName = myDirectory + "\\newaccounts.csv";
+            string fileName = myDirectory + "\\newaccounts.csv";          //Testing name Release simply overwrites accounts.csv 
 
             using (StreamWriter writetext = new StreamWriter(fileName))
             {
